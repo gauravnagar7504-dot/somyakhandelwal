@@ -59,27 +59,32 @@ export const HomePage: React.FC = () => {
   const serviceCards = [
     {
       ...services.find((s) => s.id === 'webdev')!,
-      icon: <Code className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      displayNumber: '01',
+      icon: <Code className="w-8 h-8 stroke-[2]" />,
       colSpan: 'lg:col-span-2',
     },
     {
       ...services.find((s) => s.id === 'seo')!,
-      icon: <TrendingUp className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      displayNumber: '02',
+      icon: <TrendingUp className="w-8 h-8 stroke-[2]" />,
       colSpan: 'lg:col-span-2',
     },
     {
       ...services.find((s) => s.id === 'design')!,
-      icon: <Palette className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      displayNumber: '03',
+      icon: <Palette className="w-8 h-8 stroke-[2]" />,
       colSpan: 'lg:col-span-2',
     },
     {
       ...services.find((s) => s.id === 'smm')!,
-      icon: <Share2 className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      displayNumber: '04',
+      icon: <Share2 className="w-8 h-8 stroke-[2]" />,
       colSpan: 'lg:col-span-3',
     },
     {
       ...services.find((s) => s.id === 'content')!,
-      icon: <PenTool className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      displayNumber: '05',
+      icon: <PenTool className="w-8 h-8 stroke-[2]" />,
       colSpan: 'lg:col-span-3',
     },
   ];
@@ -412,43 +417,46 @@ export const HomePage: React.FC = () => {
               <Link
                 key={service.id}
                 to={`/services#${service.id}`}
-                className={`group relative flex flex-col justify-between rounded-3xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cobalt/60 transition-all duration-300 p-7 sm:p-8 md:p-9 backdrop-blur-md shadow-xl hover:shadow-2xl hover:shadow-cobalt/20 hover:-translate-y-1.5 overflow-hidden h-full ${service.colSpan}`}
+                className={`group relative flex flex-col justify-between rounded-3xl bg-[#0A224E]/95 hover:bg-[#0E2C66] border border-white/20 hover:border-cobalt transition-all duration-300 p-7 sm:p-8 md:p-9 backdrop-blur-md shadow-[0_12px_32px_rgba(0,0,0,0.35)] hover:shadow-[0_20px_50px_rgba(23,70,209,0.4)] hover:-translate-y-2.5 overflow-hidden h-full ${service.colSpan}`}
               >
                 {/* Top Edge Gradient Highlight */}
-                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cobalt to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-cobalt to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <div>
-                  {/* Top Row: Big Icon Container + Monospace Index */}
+                {/* Subtle Ambient Glow Orb inside card on hover */}
+                <div className="absolute -top-16 -right-16 w-40 h-40 bg-cobalt/20 rounded-full blur-2xl group-hover:bg-cobalt/40 transition-all duration-500 pointer-events-none" />
+
+                <div className="relative z-10">
+                  {/* Top Row: Big Animated Icon Container + High-Visibility Sequential Number */}
                   <div className="flex items-start justify-between gap-4 mb-6">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/[0.08] border border-white/15 flex items-center justify-center text-cobalt-tint group-hover:bg-cobalt group-hover:text-white group-hover:border-cobalt group-hover:scale-105 transition-all duration-300 shadow-md">
+                    <div className="w-16 h-16 rounded-2xl bg-cobalt/30 border border-cobalt/50 flex items-center justify-center text-white group-hover:bg-cobalt group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300 shadow-md group-hover:shadow-[0_0_24px_rgba(23,70,209,0.6)]">
                       {service.icon}
                     </div>
                     <div className="flex flex-col items-end">
-                      <span className="font-mono text-2xl sm:text-3xl font-bold text-white/20 group-hover:text-cobalt-tint/60 transition-colors">
-                        {service.number}
+                      <span className="font-mono text-3xl sm:text-4xl font-extrabold text-cobalt-tint/90 group-hover:text-white transition-colors group-hover:drop-shadow-[0_0_12px_rgba(23,70,209,0.7)]">
+                        {service.displayNumber}
                       </span>
-                      <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-medium mt-0.5">
+                      <span className="text-xs font-mono uppercase tracking-wider text-slate-300 font-semibold mt-1">
                         {service.discipline}
                       </span>
                     </div>
                   </div>
 
                   {/* Service Title */}
-                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-cobalt-tint transition-colors mb-3 leading-snug">
+                  <h3 className="font-display font-bold text-2xl sm:text-[26px] text-white group-hover:text-cobalt-tint transition-colors mb-3.5 leading-snug">
                     {service.title}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-sm text-slate-300/85 leading-relaxed mb-6 font-normal">
+                  {/* Description — High-Contrast Visible Text */}
+                  <p className="text-sm sm:text-base text-slate-100 leading-relaxed mb-6 font-normal">
                     {service.shortDescription || service.description}
                   </p>
 
-                  {/* Deliverables Badges */}
+                  {/* Deliverables Badges — High-Contrast Pills */}
                   <div className="flex flex-wrap gap-2 mb-8">
                     {service.deliverables.slice(0, 3).map((item, idx) => (
                       <span
                         key={idx}
-                        className="px-3 py-1 rounded-full text-xs font-medium bg-white/[0.06] border border-white/10 text-slate-200 group-hover:border-white/20 transition-colors"
+                        className="px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/10 border border-white/20 text-white group-hover:bg-cobalt/40 group-hover:border-cobalt transition-all"
                       >
                         {item}
                       </span>
@@ -456,14 +464,14 @@ export const HomePage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Bottom Pinned Action */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between mt-auto">
-                  <span className="text-xs font-mono text-slate-400 group-hover:text-slate-300 transition-colors">
+                {/* Bottom Pinned Action with Interactive Animated Arrow */}
+                <div className="relative z-10 pt-4 border-t border-white/15 flex items-center justify-between mt-auto">
+                  <span className="text-xs font-mono text-slate-300 font-medium">
                     {service.badge || 'Tailored Engagement'}
                   </span>
-                  <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-cobalt-tint group-hover:text-white transition-colors">
+                  <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-white group-hover:text-cobalt-tint transition-colors">
                     <span>Explore Service</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="w-4.5 h-4.5 transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-translate-y-1.5" />
                   </span>
                 </div>
               </Link>
