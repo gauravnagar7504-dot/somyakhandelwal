@@ -95,27 +95,14 @@ export const WorkPage: React.FC = () => {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-start">
-              {filteredProjects.map((project, index) => {
-                // Apply asymmetric layout spans
-                // First card on 'all' filter gets 8 columns, second gets 4 columns, others get 6 columns
-                let colSpan = 'lg:col-span-6';
-                if (activeFilter === 'all') {
-                  if (index === 0) colSpan = 'lg:col-span-8';
-                  else if (index === 1) colSpan = 'lg:col-span-4';
-                  else colSpan = 'lg:col-span-6';
-                }
-
-                return (
-                  <div key={project.id} className={`${colSpan}`}>
-                    <ProjectCard
-                      project={project}
-                      onSelect={setSelectedProject}
-                      featured={activeFilter === 'all' && index === 0}
-                    />
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+              {filteredProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onSelect={setSelectedProject}
+                />
+              ))}
             </div>
           )}
         </div>
