@@ -288,13 +288,10 @@ export const HomePage: React.FC = () => {
                 {/* Content Container (flex-col justify-between guarantees identical bottom alignment) */}
                 <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
                   <div>
-                    {/* Role & Timeline Header */}
-                    <div className="flex items-center justify-between text-xs uppercase tracking-wider mb-3">
-                      <span className="font-semibold text-cobalt font-mono">
+                    {/* Role Header (Sprint detail removed) */}
+                    <div className="mb-3">
+                      <span className="font-semibold text-cobalt font-mono text-xs uppercase tracking-wider">
                         {project.role.split(',')[0]}
-                      </span>
-                      <span className="font-mono text-slate-400 text-[11px]">
-                        {project.timeline}
                       </span>
                     </div>
 
@@ -307,21 +304,9 @@ export const HomePage: React.FC = () => {
                     </h3>
 
                     {/* Project Brief */}
-                    <p className="text-sm text-slate-text leading-relaxed mb-5 line-clamp-3 min-h-[4.25rem]">
+                    <p className="text-sm text-slate-text leading-relaxed line-clamp-3 mb-6">
                       {project.brief}
                     </p>
-
-                    {/* Deliverable Tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {project.tags.slice(0, 3).map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-surface text-slate-text border border-slate-border"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
                   </div>
 
                   {/* Bottom-Pinned Footer Bar */}
