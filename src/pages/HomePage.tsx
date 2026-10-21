@@ -50,6 +50,8 @@ export const HomePage: React.FC = () => {
   const projectB = projects.find((p) => p.id === 'atelier-rouge') || projects[3];
   const projectC = projects.find((p) => p.id === 'aura-nocturne') || projects[0];
 
+  const featuredProjects = [projectA, projectB, projectC];
+
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('hello@somyakhandelwal.com');
     setCopiedEmail(true);
@@ -234,83 +236,84 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ======================================================== */}
-      {/* SECTION 4 — SELECTED WORK                                */}
+      {/* SECTION 4 — SELECTED WORK (SYMMETRIC SHOWCASE)           */}
       {/* ======================================================== */}
-      <section className="w-full py-20 md:py-24 bg-[#F8FAFD] border-b border-slate-border" id="selected-work">
+      <section className="w-full py-20 md:py-28 bg-[#F8FAFD] border-b border-slate-border" id="selected-work">
         <div className="max-w-container mx-auto px-6 md:px-8">
-          {/* Section Heading */}
-          <div className="mb-14">
+          {/* Section Heading — Centered, Balanced, and Clear */}
+          <div className="text-center max-w-2xl mx-auto mb-14 md:mb-16">
             <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-cobalt"></span>
-              <span className="text-xs uppercase tracking-widest font-semibold text-cobalt">
+              <span className="w-2 h-2 rounded-full bg-cobalt"></span>
+              <span className="text-xs uppercase tracking-widest font-semibold text-cobalt font-mono">
                 SELECTED WORK
               </span>
             </div>
-            <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-navy tracking-tight">
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-navy tracking-tight mb-4">
               Good ideas deserve good execution.
             </h2>
+            <p className="text-slate-text text-base sm:text-lg leading-relaxed">
+              A curated selection of recent client projects across web development, brand identity, and social media marketing.
+            </p>
           </div>
 
-          {/* Asymmetric Portfolio Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-12">
-            {/* Project A: Large Featured Project (Full 12 cols with 7-5 internal split) */}
-            <div className="lg:col-span-12 bg-white rounded-2xl border border-slate-border overflow-hidden group hover:border-cobalt transition-all duration-300 shadow-sm hover:shadow-card-hover">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center p-6 md:p-8">
-                {/* Visual: Browser Frame Mockup (7 cols) */}
+          {/* Fully Symmetric 3-Column Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch mb-14">
+            {featuredProjects.map((project) => (
+              <div
+                key={project.id}
+                className="group flex flex-col bg-white rounded-2xl border border-slate-border hover:border-cobalt/60 transition-all duration-300 shadow-sm hover:shadow-card-hover overflow-hidden h-full"
+              >
+                {/* Visual Thumbnail */}
                 <div
-                  className="lg:col-span-7 rounded-xl overflow-hidden border border-slate-border bg-slate-surface cursor-pointer relative group/img"
-                  onClick={() => setSelectedProject(projectA)}
+                  className="relative w-full aspect-[16/10] overflow-hidden bg-slate-surface cursor-pointer group/img shrink-0"
+                  onClick={() => setSelectedProject(project)}
                 >
-                  <div className="bg-slate-surface/80 px-3 py-2 border-b border-slate-border flex items-center justify-between">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-slate-border"></span>
-                      <span className="w-2 h-2 rounded-full bg-slate-border"></span>
-                      <span className="w-2 h-2 rounded-full bg-slate-border"></span>
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-text">
-                      atelier-architects.concept
-                    </span>
-                    <span className="text-[10px] font-mono text-cobalt font-semibold">
-                      Featured Build
-                    </span>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
+                  />
+                  {/* Category Pill Badge */}
+                  <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-navy shadow-sm border border-slate-border/50">
+                    {project.category}
                   </div>
-                  <div className="aspect-[16/10] w-full overflow-hidden relative">
-                    <img
-                      src={projectA.image}
-                      alt={projectA.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover/img:scale-105"
-                    />
-                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg text-navy text-xs font-medium shadow-sm flex items-center gap-1.5">
-                      <Eye className="w-3.5 h-3.5 text-cobalt" />
-                      <span>Inspect Case</span>
-                    </div>
+                  {/* Inspect Case Pill */}
+                  <div className="absolute bottom-3.5 right-3.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg text-navy text-xs font-medium shadow-sm flex items-center gap-1.5 opacity-90 group-hover/img:opacity-100 transition-opacity">
+                    <Eye className="w-3.5 h-3.5 text-cobalt" />
+                    <span>Inspect</span>
                   </div>
                 </div>
 
-                {/* Details (5 cols) */}
-                <div className="lg:col-span-5 flex flex-col justify-between py-2">
+                {/* Content Container (flex-col justify-between guarantees identical bottom alignment) */}
+                <div className="p-6 sm:p-7 flex flex-col flex-1 justify-between">
                   <div>
-                    <div className="flex items-center justify-between text-xs text-slate-text uppercase tracking-wider mb-2 font-mono">
-                      <span className="px-2 py-0.5 rounded bg-slate-surface text-cobalt font-semibold border border-slate-border font-sans">
-                        {projectA.category}
+                    {/* Role & Timeline Header */}
+                    <div className="flex items-center justify-between text-xs uppercase tracking-wider mb-3">
+                      <span className="font-semibold text-cobalt font-mono">
+                        {project.role.split(',')[0]}
                       </span>
-                      <span>Concept Study</span>
+                      <span className="font-mono text-slate-400 text-[11px]">
+                        {project.timeline}
+                      </span>
                     </div>
 
+                    {/* Project Title */}
                     <h3
-                      className="font-display font-bold text-2xl lg:text-3xl text-navy group-hover:text-cobalt transition-colors cursor-pointer mb-3"
-                      onClick={() => setSelectedProject(projectA)}
+                      className="font-display font-bold text-xl sm:text-2xl text-navy group-hover:text-cobalt transition-colors cursor-pointer mb-3 leading-snug line-clamp-2 min-h-[3.5rem] flex items-center"
+                      onClick={() => setSelectedProject(project)}
                     >
-                      {projectA.title}
+                      {project.title}
                     </h3>
 
-                    <p className="text-sm text-slate-text leading-relaxed mb-6">
-                      {projectA.brief}
+                    {/* Project Brief */}
+                    <p className="text-sm text-slate-text leading-relaxed mb-5 line-clamp-3 min-h-[4.25rem]">
+                      {project.brief}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {projectA.tags.map((tag, idx) => (
+                    {/* Deliverable Tags */}
+                    <div className="flex flex-wrap gap-1.5 mb-6">
+                      {project.tags.slice(0, 3).map((tag, idx) => (
                         <span
                           key={idx}
                           className="px-2.5 py-1 rounded-md text-xs font-medium bg-slate-surface text-slate-text border border-slate-border"
@@ -321,126 +324,30 @@ export const HomePage: React.FC = () => {
                     </div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setSelectedProject(projectA)}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-cobalt hover:text-cobalt-hover self-start group/btn"
-                  >
-                    <span>View Project</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                  </button>
+                  {/* Bottom-Pinned Footer Bar */}
+                  <div className="pt-4 border-t border-slate-border flex items-center justify-between mt-auto">
+                    <span className="text-xs text-slate-text font-mono truncate max-w-[140px]" title={project.client}>
+                      {project.client}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedProject(project)}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-cobalt hover:text-cobalt-hover group/btn shrink-0"
+                    >
+                      <span>View Project</span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Project B: Supporting Preview (6 cols) */}
-            <div className="lg:col-span-6 bg-white rounded-2xl border border-slate-border overflow-hidden group hover:border-cobalt transition-all duration-300 shadow-sm hover:shadow-card-hover flex flex-col justify-between">
-              <div
-                className="aspect-[16/10] w-full overflow-hidden bg-slate-surface relative cursor-pointer"
-                onClick={() => setSelectedProject(projectB)}
-              >
-                <img
-                  src={projectB.image}
-                  alt={projectB.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded text-xs font-semibold text-navy shadow-sm">
-                  {projectB.category}
-                </div>
-                <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded text-xs font-medium text-navy shadow-sm flex items-center gap-1">
-                  <Eye className="w-3 h-3 text-cobalt" />
-                  <span>Inspect</span>
-                </div>
-              </div>
-
-              <div className="p-6 md:p-7 flex flex-col justify-between flex-grow">
-                <div>
-                  <span className="text-xs font-mono text-slate-text uppercase tracking-wider block mb-2">
-                    Social Campaign Concept
-                  </span>
-                  <h3
-                    className="font-display font-bold text-xl lg:text-2xl text-navy group-hover:text-cobalt transition-colors cursor-pointer mb-2"
-                    onClick={() => setSelectedProject(projectB)}
-                  >
-                    {projectB.title}
-                  </h3>
-                  <p className="text-sm text-slate-text leading-relaxed mb-6">
-                    {projectB.brief}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-border flex items-center justify-between">
-                  <span className="text-xs text-slate-text font-mono">Triptych Cadence</span>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedProject(projectB)}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-cobalt hover:text-cobalt-hover"
-                  >
-                    <span>View Project</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Project C: Supporting Preview (6 cols) */}
-            <div className="lg:col-span-6 bg-white rounded-2xl border border-slate-border overflow-hidden group hover:border-cobalt transition-all duration-300 shadow-sm hover:shadow-card-hover flex flex-col justify-between">
-              <div
-                className="aspect-[16/10] w-full overflow-hidden bg-slate-surface relative cursor-pointer"
-                onClick={() => setSelectedProject(projectC)}
-              >
-                <img
-                  src={projectC.image}
-                  alt={projectC.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded text-xs font-semibold text-navy shadow-sm">
-                  {projectC.category}
-                </div>
-                <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded text-xs font-medium text-navy shadow-sm flex items-center gap-1">
-                  <Eye className="w-3 h-3 text-cobalt" />
-                  <span>Inspect</span>
-                </div>
-              </div>
-
-              <div className="p-6 md:p-7 flex flex-col justify-between flex-grow">
-                <div>
-                  <span className="text-xs font-mono text-slate-text uppercase tracking-wider block mb-2">
-                    Visual Identity Concept
-                  </span>
-                  <h3
-                    className="font-display font-bold text-xl lg:text-2xl text-navy group-hover:text-cobalt transition-colors cursor-pointer mb-2"
-                    onClick={() => setSelectedProject(projectC)}
-                  >
-                    {projectC.title}
-                  </h3>
-                  <p className="text-sm text-slate-text leading-relaxed mb-6">
-                    {projectC.brief}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-border flex items-center justify-between">
-                  <span className="text-xs text-slate-text font-mono">Foil &amp; Typography</span>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedProject(projectC)}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-cobalt hover:text-cobalt-hover"
-                  >
-                    <span>View Project</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
-          {/* Secondary CTA to view full portfolio */}
+          {/* Centered Secondary CTA */}
           <div className="text-center pt-2">
             <Link
               to="/work"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-btn bg-slate-surface border border-slate-border text-navy text-sm font-semibold hover:border-cobalt hover:text-cobalt transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-btn bg-white border border-slate-border text-navy text-sm font-semibold hover:border-cobalt hover:text-cobalt hover:shadow-card-hover transition-all shadow-sm"
             >
               <span>Explore All Work</span>
               <ArrowUpRight className="w-4 h-4" />
