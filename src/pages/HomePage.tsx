@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowUpRight,
   ArrowRight,
-  ChevronLeft,
-  ChevronRight,
   Compass,
   FileText,
   Palette,
@@ -27,89 +25,6 @@ import { Project } from '../types';
 export const HomePage: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
-
-  // Hero Service Banners (Desktop Landscape & Mobile Portrait)
-  const heroBanners = [
-    {
-      id: 'web-dev',
-      title: 'Website Development',
-      image: '/images/banner-web-dev.png',
-      mobileImage: '/images/banner-mobile-web-dev.png',
-      contactUrl: '/contact?service=Website%20Development',
-    },
-    {
-      id: 'seo',
-      title: 'SEO Services',
-      image: '/images/banner-seo.png',
-      mobileImage: '/images/banner-mobile-seo.png',
-      contactUrl: '/contact?service=SEO%20%26%20Organic%20Growth',
-    },
-    {
-      id: 'graphic-design',
-      title: 'Graphic Designing',
-      image: '/images/banner-graphic-design.png',
-      mobileImage: '/images/banner-mobile-graphic-design.png',
-      contactUrl: '/contact?service=Graphic%20Designing',
-    },
-    {
-      id: 'content',
-      title: 'Content Writing',
-      image: '/images/banner-content-writing.png',
-      mobileImage: '/images/banner-mobile-content-writing.png',
-      contactUrl: '/contact?service=Content%20Writing',
-    },
-    {
-      id: 'social-media',
-      title: 'Social Media Marketing',
-      image: '/images/banner-social-media.png',
-      mobileImage: '/images/banner-mobile-social-media.png',
-      contactUrl: '/contact?service=Social%20Media%20Marketing',
-    },
-  ];
-
-  const [activeBannerIndex, setActiveBannerIndex] = useState(0);
-  const [isBannerPaused, setIsBannerPaused] = useState(false);
-  const [touchStartX, setTouchStartX] = useState<number | null>(null);
-  const [touchEndX, setTouchEndX] = useState<number | null>(null);
-
-  const minSwipeDistance = 45;
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchEndX(null);
-    setTouchStartX(e.targetTouches[0].clientX);
-    setIsBannerPaused(true);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEndX(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    setIsBannerPaused(false);
-    if (touchStartX === null || touchEndX === null) return;
-    const distance = touchStartX - touchEndX;
-    if (distance > minSwipeDistance) {
-      nextBanner();
-    } else if (distance < -minSwipeDistance) {
-      prevBanner();
-    }
-  };
-
-  useEffect(() => {
-    if (isBannerPaused) return;
-    const interval = setInterval(() => {
-      setActiveBannerIndex((prev) => (prev + 1) % heroBanners.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [isBannerPaused, heroBanners.length]);
-
-  const nextBanner = () => {
-    setActiveBannerIndex((prev) => (prev + 1) % heroBanners.length);
-  };
-
-  const prevBanner = () => {
-    setActiveBannerIndex((prev) => (prev - 1 + heroBanners.length) % heroBanners.length);
-  };
 
   // Testimonial rows for marquee showcase
   const row1 = reviews.slice(0, 4);
@@ -183,108 +98,58 @@ export const HomePage: React.FC = () => {
       />
 
       {/* ======================================================== */}
-      {/* SECTION 2 — HERO (RESPONSIVE SERVICE BANNERS)             */}
+      {/* SECTION 2 — HERO SECTION                                  */}
       {/* ======================================================== */}
-      <section className="w-full relative overflow-hidden bg-white border-b border-slate-border">
+      <section className="relative w-full overflow-hidden bg-white border-b border-slate-border py-20 sm:py-28 md:py-36">
+        {/* Subtle Architectural Grid Background with radial fade mask */}
         <div
-          className="relative w-full overflow-hidden select-none"
-          onMouseEnter={() => setIsBannerPaused(true)}
-          onMouseLeave={() => setIsBannerPaused(false)}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
-        >
-          {/* Sliding Banners Track */}
-          <div
-            className="flex w-full transition-transform duration-700 ease-out"
-            style={{ transform: `translateX(-${activeBannerIndex * 100}%)` }}
-          >
-            {heroBanners.map((banner) => (
-              <div
-                key={banner.id}
-                className="w-full shrink-0 aspect-[4/5] sm:aspect-[4480/1911] overflow-hidden bg-slate-100"
-              >
-                <Link
-                  to={banner.contactUrl}
-                  className="block w-full h-full cursor-pointer focus:outline-none"
-                  aria-label={`${banner.title} - Click to navigate to Contact Page`}
-                  title={`Click to get in touch for ${banner.title}`}
-                >
-                  <picture className="w-full h-full block">
-                    <source
-                      media="(max-width: 639px)"
-                      srcSet={banner.mobileImage}
-                    />
-                    <source
-                      media="(min-width: 640px)"
-                      srcSet={banner.image}
-                    />
-                    <img
-                      src={banner.image}
-                      alt={`${banner.title} banner`}
-                      className="w-full h-full object-cover block select-none pointer-events-none"
-                      style={{
-                        imageRendering: '-webkit-optimize-contrast',
-                        transform: 'translateZ(0)',
-                        backfaceVisibility: 'hidden',
-                      }}
-                      loading="eager"
-                      decoding="async"
-                    />
-                  </picture>
-                </Link>
-              </div>
-            ))}
-          </div>
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(20, 40, 75, 0.055) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(20, 40, 75, 0.055) 1px, transparent 1px)
+            `,
+            backgroundSize: '48px 48px',
+            maskImage: 'radial-gradient(ellipse 65% 65% at 50% 50%, #000 20%, transparent 80%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 65% 65% at 50% 50%, #000 20%, transparent 80%)',
+          }}
+          aria-hidden="true"
+        />
 
-          {/* Previous Arrow Button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              prevBanner();
-            }}
-            aria-label="Previous service banner"
-            className="absolute left-2.5 sm:left-6 md:left-8 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-navy/60 hover:bg-cobalt text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm shadow-md hover:scale-105 z-20 cursor-pointer"
+        <div className="relative max-w-container mx-auto px-6 md:px-8 flex flex-col items-center text-center">
+          {/* Pill Badge */}
+          <Link
+            to="/contact"
+            className="group inline-flex items-center gap-2 sm:gap-2.5 p-1 sm:pr-3.5 rounded-full border border-slate-border bg-white/95 shadow-sm backdrop-blur-sm hover:border-cobalt/40 hover:shadow-editorial transition-all duration-200 mb-8 sm:mb-10"
+            title="Claim your newly joined discount"
           >
-            <ChevronLeft className="w-4 h-4 sm:w-7 sm:h-7" />
-          </button>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200/60 text-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Discount 30%
+            </span>
+            <span className="text-xs sm:text-sm text-slate-text font-medium flex items-center gap-1.5">
+              For newly joined customers
+              <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-cobalt group-hover:translate-x-0.5 transition-all" />
+            </span>
+          </Link>
 
-          {/* Next Arrow Button */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              nextBanner();
-            }}
-            aria-label="Next service banner"
-            className="absolute right-2.5 sm:right-6 md:right-8 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-navy/60 hover:bg-cobalt text-white flex items-center justify-center transition-all duration-200 backdrop-blur-sm shadow-md hover:scale-105 z-20 cursor-pointer"
+          {/* Main Headline */}
+          <h1 className="font-display font-bold text-5xl sm:text-6xl md:text-7xl lg:text-[88px] text-navy leading-[1.06] tracking-tight mb-6 sm:mb-8 max-w-4xl">
+            Digital Marketing<br />Services
+          </h1>
+
+          {/* Subheading / Description */}
+          <p className="font-sans text-base sm:text-lg md:text-xl text-slate-text max-w-2xl mx-auto leading-relaxed mb-10 sm:mb-12 font-normal">
+            Through careful keyword research and white hat SEO practices, we can help you achieve higher organic rankings and increased visibility in search results.
+          </p>
+
+          {/* Action CTA Button */}
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-navy hover:bg-cobalt text-white font-semibold text-sm sm:text-base transition-all duration-300 shadow-sm hover:shadow-card-hover hover:-translate-y-0.5 active:translate-y-0"
           >
-            <ChevronRight className="w-4 h-4 sm:w-7 sm:h-7" />
-          </button>
-
-          {/* Pagination Dots */}
-          <div className="absolute bottom-2.5 sm:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 z-20 bg-navy/50 backdrop-blur-md px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full shadow-md">
-            {heroBanners.map((banner, idx) => (
-              <button
-                key={banner.id}
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setActiveBannerIndex(idx);
-                }}
-                aria-label={`Go to slide ${idx + 1}: ${banner.title}`}
-                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                  activeBannerIndex === idx
-                    ? 'w-5 sm:w-7 bg-white shadow-sm'
-                    : 'w-1.5 sm:w-2 bg-white/50 hover:bg-white/80'
-                }`}
-              />
-            ))}
-          </div>
+            Free Proposal
+          </Link>
         </div>
       </section>
 
