@@ -165,14 +165,14 @@ export const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-border p-6 sm:p-8 md:p-10 shadow-sm relative">
+    <div className="bg-white rounded-3xl border border-slate-border p-7 sm:p-9 md:p-10 shadow-editorial relative">
       {isSubmitted ? (
         <div className="flex flex-col items-center justify-center py-10 px-4 text-center animate-fadeIn">
           <div className="w-16 h-16 rounded-full bg-slate-surface text-cobalt flex items-center justify-center mb-6 border border-slate-border">
             <CheckCircle2 className="w-8 h-8 text-cobalt" />
           </div>
 
-          <span className="text-xs uppercase tracking-widest font-semibold text-cobalt mb-2">
+          <span className="text-xs uppercase tracking-widest font-semibold text-cobalt mb-2 font-mono">
             Enquiry Prepared &amp; Logged
           </span>
 
@@ -184,10 +184,10 @@ export const ContactForm: React.FC = () => {
             Your enquiry details have been recorded. You can also send this note directly to Somya's inbox with one click to guarantee immediate delivery.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto mb-8">
             <a
               href={mailtoLink}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-btn bg-cobalt text-white text-sm font-medium hover:bg-cobalt-hover transition-colors shadow-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-cobalt text-white text-sm font-semibold hover:bg-cobalt-hover transition-all shadow-sm"
             >
               <Send className="w-4 h-4" />
               <span>Open in Email App (Prefilled)</span>
@@ -197,7 +197,7 @@ export const ContactForm: React.FC = () => {
             <button
               type="button"
               onClick={copyEmail}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-btn border border-slate-border bg-white text-navy text-sm font-medium hover:bg-slate-surface transition-colors"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-slate-border bg-white text-navy text-sm font-semibold hover:bg-slate-surface transition-all"
             >
               {copied ? (
                 <>
@@ -226,7 +226,7 @@ export const ContactForm: React.FC = () => {
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-7">
+        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-8">
           {/* Honeypot field (hidden from real users) */}
           <div className="hidden" aria-hidden="true">
             <label htmlFor="hp_field">Do not fill this field</label>
@@ -242,7 +242,7 @@ export const ContactForm: React.FC = () => {
           </div>
 
           {errors.form && (
-            <div className="p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+            <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
               {errors.form}
             </div>
           )}
@@ -253,7 +253,7 @@ export const ContactForm: React.FC = () => {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="name"
-                className="text-sm font-medium text-navy flex items-center justify-between"
+                className="text-sm font-semibold text-navy flex items-center justify-between"
               >
                 <span>
                   Full Name <span className="text-cobalt">*</span>
@@ -271,7 +271,7 @@ export const ContactForm: React.FC = () => {
                 placeholder="e.g. Elena Vance"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className={`h-12 w-full px-4 rounded-btn bg-slate-surface text-navy placeholder:text-slate-text/50 text-sm border outline-none transition-all focus:bg-white focus:ring-2 focus:ring-cobalt ${
+                className={`h-12 w-full px-4 rounded-xl bg-slate-surface/70 text-navy placeholder:text-slate-text/50 text-sm border outline-none transition-all focus:bg-white focus:border-cobalt focus:ring-4 focus:ring-cobalt/10 ${
                   errors.name ? 'border-red-400' : 'border-slate-border'
                 }`}
               />
@@ -281,7 +281,7 @@ export const ContactForm: React.FC = () => {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                className="text-sm font-medium text-navy flex items-center justify-between"
+                className="text-sm font-semibold text-navy flex items-center justify-between"
               >
                 <span>
                   Email Address <span className="text-cobalt">*</span>
@@ -299,25 +299,25 @@ export const ContactForm: React.FC = () => {
                 placeholder="elena@company.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={`h-12 w-full px-4 rounded-btn bg-slate-surface text-navy placeholder:text-slate-text/50 text-sm border outline-none transition-all focus:bg-white focus:ring-2 focus:ring-cobalt ${
+                className={`h-12 w-full px-4 rounded-xl bg-slate-surface/70 text-navy placeholder:text-slate-text/50 text-sm border outline-none transition-all focus:bg-white focus:border-cobalt focus:ring-4 focus:ring-cobalt/10 ${
                   errors.email ? 'border-red-400' : 'border-slate-border'
                 }`}
               />
             </div>
           </div>
 
-          {/* Service Selection (Multi-select) */}
+          {/* Service Selection (Multi-select Pill Capsules) */}
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-navy">
+              <label className="text-sm font-semibold text-navy">
                 Services Needed <span className="text-cobalt">*</span>
               </label>
-              <span className="text-xs text-slate-text">Select all that apply</span>
+              <span className="text-xs text-slate-text font-mono">Select all that apply</span>
             </div>
             {errors.services && (
               <span className="text-xs text-red-600 font-medium">{errors.services}</span>
             )}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {availableServices.map((svc) => {
                 const selected = formData.services.includes(svc);
                 return (
@@ -325,10 +325,10 @@ export const ContactForm: React.FC = () => {
                     key={svc}
                     type="button"
                     onClick={() => toggleService(svc)}
-                    className={`px-3.5 py-2 rounded-btn text-xs font-medium transition-all duration-150 border ${
+                    className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 border cursor-pointer select-none ${
                       selected
-                        ? 'bg-cobalt text-white border-cobalt shadow-sm'
-                        : 'bg-slate-surface text-slate-text border-slate-border hover:text-navy hover:bg-slate-border/40'
+                        ? 'bg-cobalt text-white border-cobalt shadow-sm shadow-cobalt/25 scale-[1.02]'
+                        : 'bg-slate-surface text-slate-text border-slate-border hover:text-navy hover:bg-white hover:border-cobalt/40'
                     }`}
                     aria-pressed={selected}
                   >
@@ -339,15 +339,15 @@ export const ContactForm: React.FC = () => {
             </div>
           </div>
 
-          {/* Budget Range (Optional) */}
+          {/* Budget Range (Pill Capsules) */}
           <div className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
-              <label className="text-sm font-medium text-navy">
-                Estimated Scope / Investment <span className="text-xs text-slate-text font-normal">(Optional)</span>
+              <label className="text-sm font-semibold text-navy">
+                Estimated Scope / Investment <span className="text-xs text-slate-text font-normal font-sans">(Optional)</span>
               </label>
-              <span className="text-xs text-slate-text">USD ($)</span>
+              <span className="text-xs text-slate-text font-mono">USD ($)</span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {budgetOptions.map((budget) => {
                 const selected = formData.budget === budget;
                 return (
@@ -355,10 +355,10 @@ export const ContactForm: React.FC = () => {
                     key={budget}
                     type="button"
                     onClick={() => setFormData({ ...formData, budget })}
-                    className={`py-2 px-3 rounded-btn text-xs font-medium transition-all text-center border ${
+                    className={`py-2.5 px-5 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 text-center border cursor-pointer select-none ${
                       selected
-                        ? 'bg-navy text-white border-navy shadow-sm'
-                        : 'bg-slate-surface text-slate-text border-slate-border hover:text-navy hover:bg-slate-border/40'
+                        ? 'bg-navy text-white border-navy shadow-sm scale-[1.02]'
+                        : 'bg-slate-surface text-slate-text border-slate-border hover:text-navy hover:bg-white hover:border-navy/40'
                     }`}
                     aria-pressed={selected}
                   >
@@ -373,7 +373,7 @@ export const ContactForm: React.FC = () => {
           <div className="flex flex-col gap-2">
             <label
               htmlFor="details"
-              className="text-sm font-medium text-navy flex items-center justify-between"
+              className="text-sm font-semibold text-navy flex items-center justify-between"
             >
               <span>
                 Project Details &amp; Goals <span className="text-cobalt">*</span>
@@ -391,23 +391,23 @@ export const ContactForm: React.FC = () => {
               placeholder="Tell me about your brand, upcoming milestones, target timelines, or any specific challenges you would like to solve..."
               value={formData.details}
               onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-              className={`w-full p-4 rounded-btn bg-slate-surface text-navy placeholder:text-slate-text/50 text-sm border outline-none transition-all focus:bg-white focus:ring-2 focus:ring-cobalt resize-y ${
+              className={`w-full p-4.5 rounded-2xl bg-slate-surface/70 text-navy placeholder:text-slate-text/50 text-sm border outline-none transition-all focus:bg-white focus:border-cobalt focus:ring-4 focus:ring-cobalt/10 resize-y leading-relaxed min-h-[140px] ${
                 errors.details ? 'border-red-400' : 'border-slate-border'
               }`}
             />
           </div>
 
           {/* Submit Row */}
-          <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-t border-slate-border">
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-5 border-t border-slate-border">
             <div className="flex items-center gap-2 text-slate-text text-xs">
-              <ShieldCheck className="w-4 h-4 text-cobalt" />
+              <ShieldCheck className="w-4 h-4 text-cobalt shrink-0" />
               <span>Direct correspondence. No automated newsletters, ever.</span>
             </div>
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-btn bg-cobalt text-white text-sm font-medium hover:bg-cobalt-hover transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed group focus-visible:ring-2 focus-visible:ring-cobalt"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-cobalt text-white text-sm font-semibold hover:bg-cobalt-hover transition-all shadow-sm hover:shadow-card-hover hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed group focus-visible:ring-2 focus-visible:ring-cobalt cursor-pointer"
             >
               {isSubmitting ? (
                 <>
