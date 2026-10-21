@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Check, Copy, Mail, ArrowUpRight } from 'lucide-react';
+import { Check, Copy, ArrowUpRight } from 'lucide-react';
 
 interface ContactCTAProps {
   eyebrow?: string;
@@ -9,9 +9,9 @@ interface ContactCTAProps {
 }
 
 export const ContactCTA: React.FC<ContactCTAProps> = ({
-  eyebrow = 'Start a Project',
+  eyebrow = 'YOUR NEXT IDEA STARTS HERE',
   title = 'Have something good in mind?',
-  description = "Let's turn your next idea into something meaningful. Reach out directly to discuss scope, timeline, and collaboration terms.",
+  description = "Tell me what you're working on. Let's figure out how to bring it to life.",
 }) => {
   const [copied, setCopied] = useState(false);
   const email = 'hello@somyakhandelwal.com';
@@ -23,74 +23,79 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
   };
 
   return (
-    <section className="w-full py-16 md:py-20 bg-white">
+    <section className="w-full py-16 md:py-24 bg-white border-b border-slate-border">
       <div className="max-w-container mx-auto px-6 md:px-8">
-        <div className="bg-cobalt border border-white/20 rounded-2xl py-14 md:py-16 px-6 md:px-12 text-center text-white relative overflow-hidden shadow-2xl">
-          {/* Subtle decorative grid/ambient touch */}
+        <div className="bg-cobalt rounded-3xl md:rounded-[36px] p-8 sm:p-12 md:p-14 lg:p-16 text-white shadow-xl relative overflow-hidden border border-white/10">
+          {/* Ambient pattern */}
           <div
-            className="absolute inset-0 opacity-[0.06] pointer-events-none"
+            className="absolute inset-0 opacity-[0.07] pointer-events-none"
             style={{
-              backgroundImage: 'radial-gradient(#FFFFFF 1px, transparent 1px)',
+              backgroundImage: 'radial-gradient(#FFFFFF 1.5px, transparent 1.5px)',
               backgroundSize: '24px 24px',
             }}
-          ></div>
+            aria-hidden="true"
+          />
+          {/* Subtle ambient glow */}
+          <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
-          <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
-              <span className="text-xs font-semibold uppercase tracking-wider text-white font-mono">
-                {eyebrow}
-              </span>
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
+            {/* Left side: Text */}
+            <div className="max-w-xl flex flex-col items-start">
+              <div className="inline-flex items-center gap-2 mb-4">
+                <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
+                <span className="text-xs uppercase tracking-widest font-semibold text-white/90 font-mono">
+                  {eyebrow}
+                </span>
+              </div>
+
+              <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4 leading-tight">
+                {title}
+              </h2>
+
+              <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-6 max-w-lg">
+                {description}
+              </p>
+
+              <p className="text-xs text-white/75">
+                Have a quick question?{' '}
+                <a
+                  href={`mailto:${email}`}
+                  className="text-white underline underline-offset-2 font-semibold hover:text-white/90"
+                >
+                  Get in touch
+                </a>{' '}
+                directly at {email}.
+              </p>
             </div>
 
-            <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white tracking-tight mb-4">
-              {title}
-            </h2>
-
-            <p className="text-base text-white/90 max-w-lg mb-8 leading-relaxed">
-              {description}
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6 w-full sm:w-auto">
+            {/* Right side: Action CTAs */}
+            <div className="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-stretch gap-3.5 shrink-0 w-full sm:w-auto">
               <Link
                 to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-btn bg-white text-cobalt font-semibold text-sm hover:bg-slate-100 transition-colors shadow-md group"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-cobalt font-semibold text-base hover:bg-slate-100 transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group"
               >
                 <span>Start a Conversation</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
 
               <button
                 type="button"
                 onClick={copyEmail}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-btn border border-white/30 bg-white/10 text-white text-sm font-medium hover:bg-white/20 hover:border-white/40 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/30 bg-white/10 text-white text-sm font-medium hover:bg-white/20 hover:border-white/40 transition-all backdrop-blur-sm"
                 title="Copy email address"
               >
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-emerald-300" />
-                    <span className="text-emerald-200">Email Copied</span>
+                    <span className="text-emerald-200 font-semibold">Email Copied!</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-4 h-4 text-white/80" />
-                    <span>Copy Direct Email</span>
+                    <span>Copy Email Address</span>
                   </>
                 )}
               </button>
-            </div>
-
-            <div className="flex items-center justify-center gap-2 text-xs text-white/80">
-              <Mail className="w-3.5 h-3.5 text-white" />
-              <span>Direct: </span>
-              <a
-                href={`mailto:${email}`}
-                className="text-white font-semibold hover:underline underline-offset-4"
-              >
-                {email}
-              </a>
-              <span className="text-white/40">|</span>
-              <span>Typically replies within 24 hours</span>
             </div>
           </div>
         </div>

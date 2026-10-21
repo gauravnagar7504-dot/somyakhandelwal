@@ -7,7 +7,6 @@ import {
   FileText,
   Palette,
   Sparkles,
-  Layers,
   Copy,
   Check,
   Eye,
@@ -728,108 +727,81 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ======================================================== */}
-      {/* SECTION 9 — FINAL CONTACT CTA                            */}
+      {/* SECTION 9 — FINAL CONTACT CTA (CURVED BLUE BOX)           */}
       {/* ======================================================== */}
-      <section className="w-full py-20 md:py-24 bg-cobalt text-white border-b border-cobalt-hover shadow-inner">
+      <section className="w-full py-16 md:py-24 bg-white border-b border-slate-border">
         <div className="max-w-container mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
-            {/* Left side: Text & CTAs */}
-            <div className="lg:col-span-7 flex flex-col items-start">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
-                <span className="text-xs uppercase tracking-widest font-semibold text-white font-mono">
-                  YOUR NEXT IDEA STARTS HERE
-                </span>
+          <div className="bg-cobalt rounded-3xl md:rounded-[36px] p-8 sm:p-12 md:p-14 lg:p-16 text-white shadow-xl relative overflow-hidden border border-white/10">
+            {/* Ambient pattern */}
+            <div
+              className="absolute inset-0 opacity-[0.07] pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(#FFFFFF 1.5px, transparent 1.5px)',
+                backgroundSize: '24px 24px',
+              }}
+              aria-hidden="true"
+            />
+            {/* Subtle ambient glow */}
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 lg:gap-14">
+              {/* Left side: Text */}
+              <div className="max-w-xl flex flex-col items-start">
+                <div className="inline-flex items-center gap-2 mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
+                  <span className="text-xs uppercase tracking-widest font-semibold text-white/90 font-mono">
+                    YOUR NEXT IDEA STARTS HERE
+                  </span>
+                </div>
+
+                <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4 leading-tight">
+                  Have something good in mind?
+                </h2>
+
+                <p className="text-base sm:text-lg text-white/90 leading-relaxed mb-6 max-w-lg">
+                  Tell me what you're working on. Let's figure out how to bring it to life.
+                </p>
+
+                <p className="text-xs text-white/75">
+                  Have a quick question?{' '}
+                  <a
+                    href="mailto:hello@somyakhandelwal.com"
+                    className="text-white underline underline-offset-2 font-semibold hover:text-white/90"
+                  >
+                    Get in touch
+                  </a>{' '}
+                  directly at hello@somyakhandelwal.com.
+                </p>
               </div>
 
-              <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4 leading-tight">
-                Have something good in mind?
-              </h2>
-
-              <p className="text-base sm:text-lg text-white/90 max-w-lg mb-8 leading-relaxed">
-                Tell me what you're working on. Let's figure out how to bring it to life.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4 mb-6 w-full sm:w-auto">
+              {/* Right side: Action CTAs */}
+              <div className="flex flex-col sm:flex-row lg:flex-col items-stretch sm:items-center lg:items-stretch gap-3.5 shrink-0 w-full sm:w-auto">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-btn bg-white text-cobalt font-semibold text-sm hover:bg-slate-100 transition-colors shadow-md group"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-cobalt font-semibold text-base hover:bg-slate-100 transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 group"
                 >
                   <span>Start a Conversation</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </Link>
 
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-btn border border-white/30 bg-white/10 text-white text-sm font-medium hover:bg-white/20 hover:border-white/40 transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full border border-white/30 bg-white/10 text-white text-sm font-medium hover:bg-white/20 hover:border-white/40 transition-all backdrop-blur-sm"
+                  title="Copy email address"
                 >
                   {copiedEmail ? (
                     <>
                       <Check className="w-4 h-4 text-emerald-300" />
-                      <span className="text-emerald-200">Email Copied</span>
+                      <span className="text-emerald-200 font-semibold">Email Copied!</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-4 h-4 text-white/80" />
-                      <span>Copy Email</span>
+                      <span>Copy Email Address</span>
                     </>
                   )}
                 </button>
-              </div>
-
-              <p className="text-xs text-white/80">
-                Have a quick question?{' '}
-                <a
-                  href="mailto:hello@somyakhandelwal.com"
-                  className="text-white underline underline-offset-2 font-semibold hover:text-white/80"
-                >
-                  Get in touch
-                </a>{' '}
-                directly at hello@somyakhandelwal.com.
-              </p>
-            </div>
-
-            {/* Right side: Clean Card with White Background for Extreme Legibility */}
-            <div className="lg:col-span-5">
-              <div className="bg-white rounded-2xl p-7 md:p-8 border border-white/20 shadow-2xl relative overflow-hidden text-navy">
-                <div className="flex items-center justify-between pb-4 mb-6 border-b border-slate-border">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-cobalt"></span>
-                    <span className="text-xs font-semibold text-navy uppercase tracking-wider">
-                      Direct Collaboration
-                    </span>
-                  </div>
-                  <span className="text-xs font-mono text-cobalt font-semibold">2025 ACTIVE</span>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="p-4 rounded-xl bg-slate-surface border border-slate-border">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-slate-text block mb-1">
-                      Available Disciplines
-                    </span>
-                    <span className="font-display font-semibold text-sm text-navy block">
-                      SEO · Social Media · Content · Graphic Design · Web
-                    </span>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-slate-surface border border-slate-border flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-slate-text block">
-                        Response Window
-                      </span>
-                      <span className="font-sans font-medium text-xs text-navy">
-                        Within 24–48 Business Hours
-                      </span>
-                    </div>
-                    <Layers className="w-5 h-5 text-cobalt" />
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-slate-border flex items-center justify-between text-xs text-slate-text">
-                  <span>Solo Studio Practice</span>
-                  <span className="text-cobalt font-semibold">Bespoke 1:1 Engagements</span>
-                </div>
               </div>
             </div>
           </div>
