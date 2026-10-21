@@ -84,3 +84,24 @@
 .animate-marquee-right:hover {
   animation-play-state: paused;
 }
+
+/* Service Ticker Ribbon Animation */
+@keyframes ticker-slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-ticker-slider {
+  display: flex;
+  width: max-content;
+  animation: ticker-slide 25s linear infinite;
+  will-change: transform;
+}
+
+.animate-ticker-slider:hover {
+  animation-play-state: paused;
+}

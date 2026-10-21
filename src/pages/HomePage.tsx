@@ -26,6 +26,18 @@ export const HomePage: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
 
+  // Services Ticker Slider Items
+  const tickerServices = [
+    { title: 'Website Development', to: '/services#webdev' },
+    { title: 'SEO & Organic Growth', to: '/services#seo' },
+    { title: 'Graphic Designing', to: '/services#design' },
+    { title: 'Content Writing', to: '/services#content' },
+    { title: 'Social Media Marketing', to: '/services#smm' },
+    { title: 'Brand Identity Systems', to: '/services#design' },
+    { title: 'UI/UX & Web Design', to: '/services#webdev' },
+    { title: 'Keyword & Search Strategy', to: '/services#seo' },
+  ];
+
   // Testimonial rows for marquee showcase
   const row1 = reviews.slice(0, 4);
   const row2 = reviews.slice(4, 8);
@@ -150,6 +162,74 @@ export const HomePage: React.FC = () => {
           >
             Free Proposal
           </Link>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* SECTION 3 — SERVICES TICKER SLIDER                        */}
+      {/* ======================================================== */}
+      <section className="relative w-full overflow-hidden bg-cobalt py-4 sm:py-5 border-y border-cobalt-hover/40 select-none z-10 shadow-sm" aria-label="Our core services ticker">
+        <div className="flex w-max animate-ticker-slider">
+          {/* Loop Set 1 */}
+          <div className="flex items-center shrink-0">
+            {tickerServices.map((service, idx) => (
+              <React.Fragment key={`ticker-1-${idx}`}>
+                <Link
+                  to={service.to}
+                  className="font-display font-bold text-sm sm:text-base md:text-lg text-white hover:text-cobalt-tint uppercase tracking-wider transition-colors whitespace-nowrap cursor-pointer flex items-center"
+                >
+                  {service.title}
+                </Link>
+                <span className="flex items-center justify-center mx-5 sm:mx-8 text-cobalt-tint/80 shrink-0" aria-hidden="true">
+                  <svg
+                    className="w-4 h-4 sm:w-5 sm:h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="12" y1="2" x2="12" y2="22" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                    <line x1="19.07" y1="4.93" x2="4.93" y2="19.07" />
+                  </svg>
+                </span>
+              </React.Fragment>
+            ))}
+          </div>
+
+          {/* Loop Set 2 (Duplicate for seamless continuous loop) */}
+          <div className="flex items-center shrink-0" aria-hidden="true">
+            {tickerServices.map((service, idx) => (
+              <React.Fragment key={`ticker-2-${idx}`}>
+                <Link
+                  to={service.to}
+                  tabIndex={-1}
+                  className="font-display font-bold text-sm sm:text-base md:text-lg text-white hover:text-cobalt-tint uppercase tracking-wider transition-colors whitespace-nowrap cursor-pointer flex items-center"
+                >
+                  {service.title}
+                </Link>
+                <span className="flex items-center justify-center mx-5 sm:mx-8 text-cobalt-tint/80 shrink-0">
+                  <svg
+                    className="w-4 h-4 sm:w-5 sm:h-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="12" y1="2" x2="12" y2="22" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                    <line x1="19.07" y1="4.93" x2="4.93" y2="19.07" />
+                  </svg>
+                </span>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
       </section>
 
