@@ -11,6 +11,10 @@ import {
   Check,
   Eye,
   HelpCircle,
+  TrendingUp,
+  Share2,
+  PenTool,
+  Code,
 } from 'lucide-react';
 import { SEOHead } from '../components/SEOHead';
 import { ProjectModal } from '../components/ProjectModal';
@@ -50,6 +54,35 @@ export const HomePage: React.FC = () => {
   const projectC = projects.find((p) => p.id === 'aura-nocturne') || projects[0];
 
   const featuredProjects = [projectA, projectB, projectC];
+
+  // Service Cards for Dark Mode Interactive Showcase
+  const serviceCards = [
+    {
+      ...services.find((s) => s.id === 'webdev')!,
+      icon: <Code className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      colSpan: 'lg:col-span-2',
+    },
+    {
+      ...services.find((s) => s.id === 'seo')!,
+      icon: <TrendingUp className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      colSpan: 'lg:col-span-2',
+    },
+    {
+      ...services.find((s) => s.id === 'design')!,
+      icon: <Palette className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      colSpan: 'lg:col-span-2',
+    },
+    {
+      ...services.find((s) => s.id === 'smm')!,
+      icon: <Share2 className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      colSpan: 'lg:col-span-3',
+    },
+    {
+      ...services.find((s) => s.id === 'content')!,
+      icon: <PenTool className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.8]" />,
+      colSpan: 'lg:col-span-3',
+    },
+  ];
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('hello@somyakhandelwal.com');
@@ -341,71 +374,109 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ======================================================== */}
-      {/* SECTION 5 — SERVICES OVERVIEW                            */}
+      {/* SECTION 5 — SERVICES OVERVIEW (DARK LUXURY SHOWCASE)      */}
       {/* ======================================================== */}
-      <section className="w-full py-20 md:py-24 bg-white border-b border-slate-border">
-        <div className="max-w-container mx-auto px-6 md:px-8">
+      <section className="relative w-full py-24 sm:py-28 md:py-32 bg-[#041B3D] text-white overflow-hidden border-b border-navy-deep">
+        {/* Subtle Ambient Dots Pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#FFFFFF 1.5px, transparent 1.5px)',
+            backgroundSize: '32px 32px',
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Ambient Glow Orbs */}
+        <div className="absolute top-1/4 -left-48 w-[450px] h-[450px] bg-cobalt/25 rounded-full blur-[140px] pointer-events-none" aria-hidden="true" />
+        <div className="absolute bottom-1/4 -right-48 w-[450px] h-[450px] bg-cobalt/20 rounded-full blur-[140px] pointer-events-none" aria-hidden="true" />
+
+        <div className="relative z-10 max-w-container mx-auto px-6 md:px-8">
           {/* Section Heading */}
-          <div className="mb-14">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-cobalt"></span>
-              <span className="text-xs uppercase tracking-widest font-semibold text-cobalt font-mono">
-                WHAT I CAN HELP WITH
-              </span>
+          <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-cobalt-tint text-xs font-semibold tracking-wider uppercase font-mono mb-4 backdrop-blur-sm shadow-inner">
+              <span className="w-1.5 h-1.5 rounded-full bg-cobalt animate-pulse" />
+              WHAT I CAN HELP WITH
             </div>
-            <h2 className="font-display font-bold text-2xl sm:text-3xl lg:text-4xl text-navy tracking-tight">
-              The right skills. Working together.
+            <h2 className="font-display font-bold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-tight mb-4">
+              The right skills. <span className="text-cobalt-tint">Working together.</span>
             </h2>
+            <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+              A comprehensive digital toolkit across web development, search engine visibility, brand identity, and editorial craft.
+            </p>
           </div>
 
-          {/* Five Numbered Editorial Rows (Clean Typography, No Images on Home) */}
-          <div className="bg-[#FAFBFD] rounded-2xl border border-slate-border shadow-sm overflow-hidden divide-y divide-slate-border mb-10">
-            {services.map((service) => (
+          {/* Symmetrical 6-Column Dark Grid (3 cards top, 2 cards bottom) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 lg:gap-8 items-stretch mb-14">
+            {serviceCards.map((service) => (
               <Link
                 key={service.id}
                 to={`/services#${service.id}`}
-                className="group block p-6 lg:p-8 hover:bg-cobalt-subtle/50 transition-colors duration-200"
+                className={`group relative flex flex-col justify-between rounded-3xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-cobalt/60 transition-all duration-300 p-7 sm:p-8 md:p-9 backdrop-blur-md shadow-xl hover:shadow-2xl hover:shadow-cobalt/20 hover:-translate-y-1.5 overflow-hidden h-full ${service.colSpan}`}
               >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
-                  {/* Two-digit index */}
-                  <div className="md:col-span-1">
-                    <span className="font-mono text-2xl font-bold text-cobalt group-hover:text-navy transition-colors">
-                      {service.number}
-                    </span>
+                {/* Top Edge Gradient Highlight */}
+                <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-cobalt to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                <div>
+                  {/* Top Row: Big Icon Container + Monospace Index */}
+                  <div className="flex items-start justify-between gap-4 mb-6">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/[0.08] border border-white/15 flex items-center justify-center text-cobalt-tint group-hover:bg-cobalt group-hover:text-white group-hover:border-cobalt group-hover:scale-105 transition-all duration-300 shadow-md">
+                      {service.icon}
+                    </div>
+                    <div className="flex flex-col items-end">
+                      <span className="font-mono text-2xl sm:text-3xl font-bold text-white/20 group-hover:text-cobalt-tint/60 transition-colors">
+                        {service.number}
+                      </span>
+                      <span className="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-medium mt-0.5">
+                        {service.discipline}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Service Title */}
-                  <div className="md:col-span-4">
-                    <h3 className="font-display text-xl lg:text-2xl font-bold text-navy group-hover:text-cobalt transition-colors">
-                      {service.title}
-                    </h3>
-                  </div>
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white group-hover:text-cobalt-tint transition-colors mb-3 leading-snug">
+                    {service.title}
+                  </h3>
 
-                  {/* Concise Description */}
-                  <div className="md:col-span-6">
-                    <p className="text-sm sm:text-base text-slate-text leading-relaxed">
-                      {service.shortDescription || service.description}
-                    </p>
-                  </div>
+                  {/* Description */}
+                  <p className="text-sm text-slate-300/85 leading-relaxed mb-6 font-normal">
+                    {service.shortDescription || service.description}
+                  </p>
 
-                  {/* Arrow Link Action */}
-                  <div className="md:col-span-1 flex justify-end">
-                    <span className="w-10 h-10 rounded-full border border-slate-border group-hover:border-cobalt group-hover:bg-cobalt group-hover:text-white text-navy flex items-center justify-center transition-all duration-200">
-                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </span>
+                  {/* Deliverables Badges */}
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {service.deliverables.slice(0, 3).map((item, idx) => (
+                      <span
+                        key={idx}
+                        className="px-3 py-1 rounded-full text-xs font-medium bg-white/[0.06] border border-white/10 text-slate-200 group-hover:border-white/20 transition-colors"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
+                </div>
+
+                {/* Bottom Pinned Action */}
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between mt-auto">
+                  <span className="text-xs font-mono text-slate-400 group-hover:text-slate-300 transition-colors">
+                    {service.badge || 'Tailored Engagement'}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-cobalt-tint group-hover:text-white transition-colors">
+                    <span>Explore Service</span>
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
                 </div>
               </Link>
             ))}
           </div>
 
-          {/* CTA: Explore All Services */}
-          <div className="flex justify-end">
+          {/* Centered CTA */}
+          <div className="text-center pt-2">
             <Link
               to="/services"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-cobalt hover:text-cobalt-hover group"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-navy font-semibold text-sm hover:bg-cobalt hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 group"
             >
-              <span>Explore All Services</span>
+              <span>Explore All Services &amp; Methodologies</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
