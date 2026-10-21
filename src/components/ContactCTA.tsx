@@ -23,7 +23,7 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
   };
 
   return (
-    <section className="w-full py-16 md:py-24 bg-white border-b border-slate-border">
+    <section className="w-full py-16 md:py-24 bg-white">
       <div className="max-w-container mx-auto px-6 md:px-8">
         <div className="bg-cobalt rounded-3xl md:rounded-[36px] p-8 sm:p-12 md:p-14 lg:p-16 text-white shadow-xl relative overflow-hidden border border-white/10">
           {/* Ambient pattern */}

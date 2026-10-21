@@ -681,7 +681,7 @@ export const HomePage: React.FC = () => {
       {/* ======================================================== */}
       {/* SECTION: FREQUENTLY ASKED QUESTIONS (FAQs)              */}
       {/* ======================================================== */}
-      <section className="w-full py-20 md:py-24 bg-white border-b border-slate-border" id="faqs">
+      <section className="w-full py-20 md:py-24 bg-white" id="faqs">
         <div className="max-w-container mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
             {/* Left Column (5 cols): Context & Direct Contact Prompt */}
@@ -729,7 +729,7 @@ export const HomePage: React.FC = () => {
       {/* ======================================================== */}
       {/* SECTION 9 — FINAL CONTACT CTA (CURVED BLUE BOX)           */}
       {/* ======================================================== */}
-      <section className="w-full py-16 md:py-24 bg-white border-b border-slate-border">
+      <section className="w-full py-16 md:py-24 bg-white">
         <div className="max-w-container mx-auto px-6 md:px-8">
           <div className="bg-cobalt rounded-3xl md:rounded-[36px] p-8 sm:p-12 md:p-14 lg:p-16 text-white shadow-xl relative overflow-hidden border border-white/10">
             {/* Ambient pattern */}

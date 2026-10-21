@@ -170,7 +170,7 @@ export const ServicesPage: React.FC = () => {
       </section>
 
       {/* FAQs Section */}
-      <section className="w-full bg-white py-20 md:py-24 border-b border-slate-border">
+      <section className="w-full bg-white py-20 md:py-24">
         <div className="max-w-container mx-auto px-6 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5">

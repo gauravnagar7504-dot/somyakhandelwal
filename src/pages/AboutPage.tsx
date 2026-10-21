@@ -296,7 +296,7 @@ export const AboutPage: React.FC = () => {
       </section>
 
       {/* 4. THREE GUIDING PRINCIPLES */}
-      <section className="w-full bg-white border-b border-slate-border py-20 md:py-24">
+      <section className="w-full bg-white py-20 md:py-24">
         <div className="max-w-container mx-auto px-6 md:px-8">
           <div className="mb-14">
             <div className="flex items-center gap-2 mb-3">
